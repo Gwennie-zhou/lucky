@@ -62,7 +62,13 @@
       const loveEle = document.createElement('img')
       loveEle.setAttribute('data-love-id', Math.random()) //红包的唯一标识，用于接下来红包是否重复点击的依据
       loveEle.src = './love.png'
-      // TODO: 优化1：不与最近一次降落的红包重叠
+      
+      /* TODO: 优化1
+      红包下落位置注意两点：
+      1、不应该下落在边缘位置,即screenWidth-80
+      2、不与最近一次降落的红包重叠
+      通过一个变量记录上一次left的距离，如果当前的left与上一个元素的left相差绝对值小于80，表明重叠了，则根据left靠左还是靠右去+80px或-80px */
+
       loveEle.style.left = createRandom(0, screenWidth-80) + 'px' // 爱心的left不能超过容器外，80是以爱心的宽度加20保险起见设置的
       loveEle.classList.add('love')
 
