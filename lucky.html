@@ -31,13 +31,69 @@
       width: 20px;
       height: 20px;
     }
+    .mask {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      opacity: 0.5;
+      display: none;
+    }
+    .result-wrap {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 101;
+      transform: translate(-50%,-50%);
+      width: 300px;
+      height: 400px;
+      display: none;
+    }
+
+    .result-img {
+      width: 100%;
+      height: 100%;
+    }
+    .text {
+      position: absolute;
+      top: 80px;
+      left: 60px;
+      width: 200px;
+    }
+    .btn {
+      position: absolute;
+      bottom: 60px;
+      left: 100px;
+      width: 100px;
+      height: 40px;
+      background-color: pink;
+      border-radius: 20px;
+      text-align: center;
+      line-height: 40px;
+    }
+    .show {
+      display: block;
+    }
   </style>
 </head>
 <body>
+  <button class="start-play">开始闯关</button>
   <div class="love-container">
   </div>
 
-  <button>stop</button>
+  <!-- 全屏遮罩 -->
+  <div class="mask"></div>
+
+  <!-- 闯关结果 -->
+  <div class="result-wrap">
+    <img src="./popup.png"  class="result-img">
+    <div class="text"></div>
+    <div class="btn"></div>
+  </div>
+
   <script>
       // 爱心雨步骤
       // 1、创建爱心图像
@@ -45,25 +101,70 @@
       // 3、给爱心绑定点击事件（可以绑定在爱心容器里），点击后积分+10，同时需要给用户一个反馈
       // 4、爱心下落到不可见区域时，需要销毁，可以设置一个定时器，每隔2秒监听所生成的爱心图像
 
-
     const loveContainer = document.querySelector('.love-container')
     const screenHeight = document.documentElement.clientHeight
     const screenWidth = document.documentElement.clientWidth
-    let totalScore = 0 
-    const loveList = [] // 用于收集生成的红包
-    const clickedLoveList = [] //用于收集已集中的红包
+    const text = document.querySelector('.text')
+    const btn = document.querySelector('.btn')
+    const resultWrap = document.querySelector('.result-wrap')
+    const mask= document.querySelector('.mask')
 
+    const startBtn = document.querySelector('.start-play')
+    startBtn.addEventListener('click', startGame)
+
+    let totalScore; //总积分
+    let loveList; // 用于收集生成的红包
+    let clickedLoveList;  //用于收集已集中的红包
+
+    // 开始游戏
+    function startGame() {
+      // 每次游戏开始后都重置变量
+      totalScore = 0 
+      loveList = []
+      clickedLoveList = []
+
+      createLove(createRandom(3,8))
+
+      // 间隔2s生成爱心
+      const timeID = setInterval(()=>{
+        for(let i = 0; i < 3 ;i++) {
+          createLove(createRandom(3,8))
+        }
+      }, 1500)
+
+      loveContainer.addEventListener('click', clickLove)
+
+      setTimeout(destroyLove, 2000)
+
+
+      // 计时1min，1min后出结果
+      setTimeout(()=>{
+        clearInterval(timeID)
+        btn.addEventListener('click', next)
+        mask.classList.toggle('show')
+        resultWrap.classList.toggle('show')
+        if (totalScore < 520) {
+          text.innerHTML = `omg，当前你的得分为: ${totalScore}。<br/><br/>不足以挑战下一关<br/><br/>再来一次吧，我相信你可以哒~`
+          btn.innerHTML = '再来一次'
+        } else {
+          text.innerHTML = `恭喜你，闯关成功！<br/><br/>当前你的得分为：520，<br/><br/>点击按钮继续闯关吧~`
+          btn.innerHTML = `开启下一关`
+        }
+      }, 1000 * 60)
+    }
+    
+    // 创建随机数
     function createRandom(min, max) {
       return Math.random() * (max-min) + min
     }
 
+    // 生成爱心节点
     function createLove(speed) {
-      // 创建爱心图像
       const loveEle = document.createElement('img')
       loveEle.setAttribute('data-love-id', Math.random()) //红包的唯一标识，用于接下来红包是否重复点击的依据
       loveEle.src = './love.png'
-      
-      /* TODO: 优化1
+
+      /* TODO: 优化1:https://www.xiabingbao.com/post/canvas/canvas-redpackrain.html
       红包下落位置注意两点：
       1、不应该下落在边缘位置,即screenWidth-80
       2、不与最近一次降落的红包重叠
@@ -77,6 +178,7 @@
 
       // 给爱心添加下落动画
       let y = 0 // 起始位置
+
       // 爱心下落动画
       function fall() {
         y += speed // 每一帧以2-4px下落，一秒内最多执行60次，即一秒可能下降的距离在120px-240px之间，假设屏幕的高度为600px，则完成整个动画的时间将在2.5-5秒之间
@@ -89,23 +191,9 @@
       requestAnimationFrame(fall)
     }
 
-    // 间隔2s生成爱心
-    const timeID = setInterval(()=>{
-      for(let i = 0; i < 3 ;i++) {
-        createLove(createRandom(3,8))
-      }
-    }, 1500)
 
-    /*  TODO: 测试代码所用，待删 ----------------------------*/
-    const btn = document.querySelector('button')
-    btn.addEventListener('click',()=>{
-      clearInterval(timeID)
-    })
-    /*  TODO: 测试代码所用，待删 ----------------------------*/
-
-
-    loveContainer.addEventListener('click', clickLove)
     
+    // 击中爱心
     function clickLove(e) {
       const element = e.target
       if (element.nodeName !== 'IMG') return
@@ -118,7 +206,7 @@
 
       if (isClicked) return
 
-      totalScore += 10
+      totalScore += 20
       clickedLoveList.push(element)
 
       console.log(totalScore);
@@ -138,8 +226,8 @@
 
     }
 
-    setTimeout(destroyLove, 2000)
-
+    
+    // 爱心下落到不可见时，销毁爱心节点
     function destroyLove() {
       loveList.forEach((love, index) => {
         // const yPX = love.style.transform
@@ -160,6 +248,12 @@
       })
 
       loveList.length && setTimeout(destroyLove, 2000)
+    }
+    
+    // 继续闯关
+    function next() {
+      mask.classList.toggle('show')
+      resultWrap.classList.toggle('show')
     }
     
   </script>
