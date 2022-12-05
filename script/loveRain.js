@@ -4,9 +4,7 @@
 // 3、给爱心绑定点击事件（可以绑定在爱心容器里），点击后积分+10，同时需要给用户一个反馈
 // 4、爱心下落到不可见区域时，需要销毁，可以设置一个定时器，每隔2秒监听所生成的爱心图像
 
-const loveContainer = document.querySelector(".love-container");
-const screenHeight = document.documentElement.clientHeight;
-const screenWidth = document.documentElement.clientWidth;
+
 const text = document.querySelector(".text");
 const btn = document.querySelector(".btn");
 const resultWrap = document.querySelector(".result-wrap");

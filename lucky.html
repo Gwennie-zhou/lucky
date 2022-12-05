@@ -7,16 +7,71 @@
   <title>爱心雨</title>
   <link rel="stylesheet" href="./style/loveRain.css">
   <style>
+    .finger-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;;
+      align-items: center;
+    }
+    .finger-img-wrap {
+      display: flex;
+      align-items: center;
+    }
+    .finger-img {
+      width: 150px;
+      height: 150px;
+    }
+    .finger-btn-wrap {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .finger {
+      width: 80px;
+      height: 40px;
+      margin-right: 10px;
+      background-color: pink;
+      border-radius: 20px;
+      text-align: center;
+      line-height: 40px;
+      color: white;
+      font-weight: bold;
+    }
+    .finger-btn {
+      width: 80px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      background-color: aqua;
+      color: black;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .again {
+      display: none;
+      margin-left: 20px;
+    }
+    .finger-text-wrap {
+      font-size: 20px;
+    }
+    .finger-btn-wrap {
+      display: flex;
+    }
     
+    .pk-text {
+      display: none;
+      margin: 0 10px;
+    }
+    
+    .show {
+      display: block;
+    }
   </style>
 </head>
 <body>
   <button class="start-play">开始闯关</button>
   <div class="love-container">
-    <img src="./images/rock.png" alt="">
-    <img src="./images/scissor.png" alt="">
-    <img src="./images/paper.png" alt="">
-
+    
   </div>
 
   <!-- 全屏遮罩 -->
@@ -35,6 +90,9 @@
       return Math.random() * (max - min) + min;
     }
 
+    const loveContainer = document.querySelector(".love-container");
+    const screenHeight = document.documentElement.clientHeight;
+    const screenWidth = document.documentElement.clientWidth;
   </script>
   <script src="./script/loveRain.js"></script>
   <script src="./script//fingerGuess.js"></script>
