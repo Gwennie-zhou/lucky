@@ -67,3 +67,7 @@
   width: 80%;
   text-align: center;
 }
+.forbidden {
+  opacity: 0.5;
+  pointer-events: none;
+}

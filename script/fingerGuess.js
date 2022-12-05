@@ -29,13 +29,13 @@ function guessFinger() {
     <div class="your-choose">${yourChooseText}</div>
     <div class="game-result"></div>
     <div class="finger-btn-wrap">
-      <div class="finger" data-id="1">石头</div>
-      <div class="finger" data-id="2">剪刀</div>
-      <div class="finger" data-id="3">布</div>
+      <button class="finger" data-id="1">石头</button>
+      <button class="finger" data-id="2">剪刀</button>
+      <button class="finger" data-id="3">布</button>
     </div>
     <div class="finger-btn-wrap">
-      <div class="finger-btn pk">PK</div>
-      <div class="finger-btn again">再来</div>
+      <button class="finger-btn pk">PK</button>
+      <button class="finger-btn again">再来</button>
     </div>
   `;
   loveContainer.classList.add("finger-container");
@@ -51,6 +51,7 @@ function guessFinger() {
   const againEle = document.querySelector(".again");
   const roundEle = document.querySelector(".round");
   const gameResultEle = document.querySelector(".game-result");
+  const fingerBtnSet = document.querySelectorAll('.finger')
 
   // 页面一开始每隔1秒切换猜拳图片，提高体验感
   toggleImg();
@@ -82,6 +83,10 @@ function guessFinger() {
   }
 
   function startPK() {
+    if (!currentResult) {
+      alert('你要先出拳哦~')
+      return
+    }
     clearInterval(fingerTimeID);
     myChooseEle.innerHTML = `我出：${fingerMap[2 - currentRound]}`; //2-currentRound的原因是：出拳的结果刚好跟我们列的数组是反过来的
     yourChooseEle.innerHTML = `你出的是：${fingerMap[currentResult - 1]}`;
@@ -90,6 +95,9 @@ function guessFinger() {
     yourChooseImg.src = `${imgList[currentResult - 1]}`;
     againEle.classList.add("show");
     calcResult();
+    pkBtnEle.classList.toggle('forbidden')
+    currentRound !== 0 && againEle.classList.toggle('forbidden')
+    Array.from(fingerBtnSet).forEach(btn => btn.classList.toggle('forbidden')) // TODO: 有点问题，不能达到禁止按钮点击的效果
   }
 
   function calcResult() {
@@ -127,6 +135,7 @@ function guessFinger() {
   againEle.addEventListener("click", againPlay);
 
   function againPlay() {
+    currentResult = 0
     currentRound++;
     roundEle.innerHTML = `第${roundMap[currentRound]}局`;
     myChooseEle.innerHTML = myChooseText;
@@ -135,6 +144,8 @@ function guessFinger() {
     pkTextEle.classList.toggle("show");
     yourChooseImg.src = "";
     toggleImg();
+    againEle.classList.toggle('forbidden')
+    pkBtnEle.classList.toggle('forbidden')
+    Array.from(fingerBtnSet).forEach(btn => btn.classList.toggle('forbidden')) //TODO: 有点问题，不能达到禁止按钮点击的效果
   }
-  
 }
