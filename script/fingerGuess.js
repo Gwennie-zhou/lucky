@@ -51,7 +51,6 @@ function guessFinger() {
   const againEle = document.querySelector(".again");
   const roundEle = document.querySelector(".round");
   const gameResultEle = document.querySelector(".game-result");
-  const fingerBtnSet = document.querySelectorAll('.finger')
 
   // 页面一开始每隔1秒切换猜拳图片，提高体验感
   toggleImg();
@@ -97,7 +96,7 @@ function guessFinger() {
     calcResult();
     pkBtnEle.classList.toggle('forbidden')
     currentRound !== 0 && againEle.classList.toggle('forbidden')
-    Array.from(fingerBtnSet).forEach(btn => btn.classList.toggle('forbidden')) // TODO: 有点问题，不能达到禁止按钮点击的效果
+    fingerBtnWrapEle.classList.toggle('forbidden') //因为石头剪刀布按钮的事件是加在外层，所以禁止的应该是这个
   }
 
   function calcResult() {
@@ -146,6 +145,6 @@ function guessFinger() {
     toggleImg();
     againEle.classList.toggle('forbidden')
     pkBtnEle.classList.toggle('forbidden')
-    Array.from(fingerBtnSet).forEach(btn => btn.classList.toggle('forbidden')) //TODO: 有点问题，不能达到禁止按钮点击的效果
+    fingerBtnWrapEle.classList.toggle('forbidden')
   }
 }
