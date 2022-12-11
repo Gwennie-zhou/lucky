@@ -4,7 +4,7 @@
 function drawSth() {
   const imgList = ['./images/剪头发.jpg', './images/月会.jpg', './images/kfc.jpg']
   const myAnswer = [
-    "剪头发场景",
+    "剪头发场景剪头发场景剪头发场景剪头发场景剪头发场景剪头发场景剪头发场景剪头发场景",
     "公司月会",
     "肯德基讲课"
   ]
@@ -27,10 +27,19 @@ function drawSth() {
       alert('先输入你的答案')
       return
     }
-    myAnswerEle.innerHTML = `${myAnswer[currentIndex]}`
+    // 多行打字动画效果:间隔一段时间逐个打印出字
     const length = myAnswer[currentIndex].length
-    myAnswerEle.style.width = `${length}em`
-    myAnswerEle.style.animation = `typing 4s steps(${length}), flicker .75s steps(1) infinite`
+    let i = 1
+
+    setTimeout(typing, 500)
+
+    function typing() {
+      myAnswerEle.innerHTML = `${myAnswer[currentIndex].slice(0,i)}<span class="separator"></span>`
+      i++
+      if (i <= length) {
+        setTimeout(typing, 500)
+      }
+    }
   }
 
   function again() {
