@@ -2,7 +2,12 @@
 1代表石头，2代表剪刀，3代表布
 游戏总共3局，无论对方出什么，这边设定出拳为：布，剪刀，石头，出拳顺序连起来即为520 */
 
-function guessFinger() {
+import { btnEle, loveContainer, reset } from './common.js'
+import { drawSth } from './drawSomething.js';
+
+export function guessFinger() {
+  reset()
+
   // 定义所有变量
   let currentResult = 0; // 0代表还没选择,1代表石头，2代表剪刀，3代表布
   let currentRound = 0; // 当前游戏的场次，总共3局
@@ -146,5 +151,12 @@ function guessFinger() {
     againEle.classList.toggle('forbidden')
     pkBtnEle.classList.toggle('forbidden')
     fingerBtnWrapEle.classList.toggle('forbidden')
+
+    if (currentRound >= 2) {
+      againEle.parentElement.removeChild(againEle)
+      btnEle.textContent = '下一关'
+      btnEle.classList.add('show')
+      btnEle.addEventListener('click', drawSth)
+    }
   }
 }

@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 禁止页面缩放 -->
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" charset="UTF-8">
   <title>lucky</title>
+  <link rel="stylesheet" href="./style/common.css">
   <link rel="stylesheet" href="./style/loveRain.css">
   <link rel="stylesheet" href="./style/fingerGuess.css">
   <link rel="stylesheet" href="./style/scratcher.css">
@@ -14,34 +16,12 @@
   </style>
 </head>
 <body>
-  <button class="start-play">开始闯关</button>
-  <div class="love-container">
-  </div>
+  <div class="love-container"></div>
 
-  <!-- 全屏遮罩 -->
-  <div class="mask"></div>
+  <div class="result"></div>
 
-  <!-- 闯关结果 -->
-  <div class="result-wrap">
-    <img src="./popup.png"  class="result-img">
-    <div class="text"></div>
-    <div class="btn"></div>
-  </div>
+  <button class="btn"></button>
 
-  <script>
-    // 创建随机数
-    function createRandom(min, max) {
-      return Math.random() * (max - min) + min;
-    }
-
-    const loveContainer = document.querySelector(".love-container");
-    const screenHeight = document.documentElement.clientHeight;
-    const screenWidth = document.documentElement.clientWidth;
-  </script>
-  <script src="./script/loveRain.js"></script>
-  <script src="./script//fingerGuess.js"></script>
-  <script src="./script/scratcher.js"></script>
-  <script src="./script/drawSomething.js"></script>
-  
+  <script type="module" src="./script/main.js"></script>
 </body>
 </html>

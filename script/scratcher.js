@@ -2,8 +2,9 @@
 类似于刮刮乐小游戏
 刮刮乐中，有两个图层，上层是蒙版，下层放着一颗心型图片，上面写着我喜欢你
 */
+import { btnEle, loveContainer, reset } from './common.js'
 
-function scratcher() {
+export function scratcher() {
   loveContainer.innerHTML = `
     <div class="scratcher-wrap">
       <div class="underlying">
@@ -16,7 +17,7 @@ function scratcher() {
 
   const scratcherWrap = document.querySelector('.scratcher-wrap')
   const canvas = document.querySelector('#canvas')
-  ctx = canvas.getContext('2d')
+  const ctx = canvas.getContext('2d')
 
   ctx.fillStyle = 'darkgray'
   ctx.fillRect(0,0,400,100)

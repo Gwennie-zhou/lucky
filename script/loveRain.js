@@ -4,21 +4,17 @@
 // 3、给爱心绑定点击事件（可以绑定在爱心容器里），点击后积分+10，同时需要给用户一个反馈
 // 4、爱心下落到不可见区域时，需要销毁，可以设置一个定时器，每隔2秒监听所生成的爱心图像
 
+import { createRandom, reset, loveContainer, screenHeight, screenWidth, btnEle, resultEle } from './common.js'
+import { guessFinger } from './fingerGuess.js'
 
-const text = document.querySelector(".text");
-const btn = document.querySelector(".btn");
-const resultWrap = document.querySelector(".result-wrap");
-const mask = document.querySelector(".mask");
-
-const startBtn = document.querySelector(".start-play");
-startBtn.addEventListener("click", startGame);
 
 let totalScore; //总积分
 let loveList; // 用于收集生成的红包
 let clickedLoveList; //用于收集已集中的红包
 
 // 开始游戏
-function startGame() {
+export function startGame() {
+  reset()
   // 每次游戏开始后都重置变量
   totalScore = 0;
   loveList = [];
@@ -40,15 +36,15 @@ function startGame() {
   // 计时1min，1min后出结果
   setTimeout(() => {
     clearInterval(timeID);
-    btn.addEventListener("click", next);
-    mask.classList.toggle("show");
-    resultWrap.classList.toggle("show");
+    btnEle.classList.add('show')
     if (totalScore < 520) {
-      text.innerHTML = `omg，当前你的得分为: ${totalScore}。<br/><br/>不足以挑战下一关<br/><br/>再来一次吧，我相信你可以哒~`;
-      btn.innerHTML = "再来一次";
+      resultEle.innerHTML = `omg，当前你的得分为: ${totalScore}。<br/><br/>不足以挑战下一关<br/><br/>你得重新挑战一下哦~`
+      btnEle.textContent = 'again'
+      btnEle.addEventListener('click', startGame)
     } else {
-      text.innerHTML = `恭喜你，闯关成功！<br/><br/>当前你的得分为：520，<br/><br/>点击按钮继续闯关吧~`;
-      btn.innerHTML = `开启下一关`;
+      resultEle.innerHTML = `恭喜你，闯关成功！<br/><br/>当前你的得分为：520，<br/><br/>点击按钮继续闯关吧~`
+      btnEle.textContent = 'next'
+      btnEle.addEventListener('click', guessFinger)
     }
   }, 1000 * 60);
 }
@@ -106,8 +102,6 @@ function clickLove(e) {
   totalScore += 20;
   clickedLoveList.push(element);
 
-  console.log(totalScore);
-
   // 给用户一个点击爱心后的反馈
   const scoreImg = document.createElement("img");
   scoreImg.classList.add("score");
@@ -146,8 +140,3 @@ function destroyLove() {
   loveList.length && setTimeout(destroyLove, 2000);
 }
 
-// 继续闯关
-function next() {
-  mask.classList.toggle("show");
-  resultWrap.classList.toggle("show");
-}

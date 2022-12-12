@@ -1,7 +1,12 @@
 /* 
 我画你猜小游戏
 */
-function drawSth() {
+import { btnEle, loveContainer, reset } from './common.js'
+import { scratcher } from './scratcher.js'
+
+export function drawSth() {
+  reset()
+
   const imgList = ['./images/剪头发.jpg', './images/月会.jpg', './images/kfc.jpg']
   const myAnswer = [
     "剪头发场景剪头发场景剪头发场景剪头发场景剪头发场景剪头发场景剪头发场景剪头发场景",
@@ -39,7 +44,6 @@ function drawSth() {
   function submit() {
     inputELe.blur()
     const answer = inputELe.value
-    console.log(answer);
     if (!answer) {
       alert('先输入你的答案')
       return
@@ -64,5 +68,12 @@ function drawSth() {
     drawImgEle.src = imgList[currentIndex]
     myAnswerEle.innerHTML = ''
     inputELe.value = ''
+
+    if (currentIndex >= myAnswer.length - 1) {
+      nextBtn.parentNode.removeChild(nextBtn)
+      btnEle.textContent = '下一关'
+      btnEle.classList.add('show')
+      btnEle.addEventListener('click', scratcher)
+    }
   }
 }
