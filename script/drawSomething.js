@@ -1,5 +1,5 @@
 /* 
-你画我猜小游戏
+我画你猜小游戏
 */
 function drawSth() {
   const imgList = ['./images/剪头发.jpg', './images/月会.jpg', './images/kfc.jpg']
@@ -10,6 +10,23 @@ function drawSth() {
   ]
   let currentIndex = 0 // 指针
 
+  loveContainer.innerHTML = `
+    <div>我画你猜</div>
+    <div class="draw-container">
+      <img src="./images/剪头发.jpg" alt="" class="draw-img">
+      <div class="my-answer"></div>
+    </div>
+    <div>
+      <div>猜一场景，把你的答案写在下面这个输入框中</div>
+      <input type="text" class="answer-input" placeholder="你的答案~">
+    </div>
+    <div>
+      <button class="draw-btn submit">提交</button>
+      <button class="draw-btn next">下一局</button>
+    </div>
+  `
+  loveContainer.classList.add('draw')
+  
   const drawImgEle = document.querySelector('.draw-img')
   const myAnswerEle = document.querySelector('.my-answer')
   const inputELe = document.querySelector('.answer-input')

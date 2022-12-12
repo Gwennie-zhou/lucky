@@ -4,86 +4,18 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>爱心雨</title>
+  <title>lucky</title>
   <link rel="stylesheet" href="./style/loveRain.css">
   <link rel="stylesheet" href="./style/fingerGuess.css">
   <link rel="stylesheet" href="./style/scratcher.css">
+  <link rel="stylesheet" href="./style/drawSomething.css">
   <style>
-    .draw {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      align-items: center;
-    }
-    .draw-img {
-      width: 100%;
-    }
-    .answer-input {
-      outline-style: none ;
-      border: 1px solid pink; 
-      border-radius: 3px;
-      padding: 10px;
-      width: 80%;
-      font-size: 16px;
-      margin-top: 15px;
-    }
-    .answer-input:focus{
-      border-color: pink;
-      outline: 0;
-      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
-      box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
-    }
-    .draw-btn {
-      width: 80px;
-      height: 40px;
-      text-align: center;
-      line-height: 40px;
-      background-color: pink;
-      color: white;
-      border-radius: 5px;
-      font-weight: bold;
-      font-size: 18px;
-    }
-    .draw-btn:nth-child(1) {
-      margin-right: 70px;
-    }
-    .my-answer {
-      width: 80%;
-      margin: 0 auto;
-    }
-    .separator {
-      border-left: 2px solid black;
-      margin-left: 3px;
-      animation: flicker 1s infinite;
-    }
     
-    /* 光标效果 */
-    @keyframes flicker {
-      from {
-        border-color: black;
-      }
-      to {
-        border-color: transparent;
-      }
-    }
   </style>
 </head>
 <body>
   <button class="start-play">开始闯关</button>
-  <div class="love-container draw">
-    <div>我画你猜</div>
-    <div class="draw-container">
-      <img src="./images/剪头发.jpg" alt="" class="draw-img">
-      <div class="my-answer"></div>
-    </div>
-    <div>
-      <div>猜一场景，把你的答案写在下面这个输入框中</div>
-      <input type="text" class="answer-input" placeholder="你的答案~">
-    </div>
-    <div>
-      <button class="draw-btn submit">提交</button>
-      <button class="draw-btn next">下一局</button>
-    </div>
+  <div class="love-container">
   </div>
 
   <!-- 全屏遮罩 -->
@@ -110,8 +42,6 @@
   <script src="./script//fingerGuess.js"></script>
   <script src="./script/scratcher.js"></script>
   <script src="./script/drawSomething.js"></script>
-  <script>
-    drawSth()
-  </script>
+  
 </body>
 </html>
