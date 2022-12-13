@@ -90,6 +90,8 @@ export function drawSth() {
     reset()
     loveContainer.innerHTML = ''
     resultEle.innerHTML = `
+      2022年是我的本命年，都说本命年运气会差，我感觉在我身上是验证了。😅<br/>
+      这一年，最幸福的，也是唯一幸运的事，大概就是遇见你了吧。<br/>
       2023年大年初一，我要送给你个礼物，刮开下面这个图层，你就会看到哦。
     `
     scratcher()
