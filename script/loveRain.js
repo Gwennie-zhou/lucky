@@ -110,7 +110,7 @@ function clickLove(e) {
 
   setTimeout(() => {
     loveContainer.removeChild(scoreImg);
-  }, 1000);
+  }, 500);
 }
 
 // 爱心下落到不可见时，销毁爱心节点
