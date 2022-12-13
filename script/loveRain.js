@@ -40,7 +40,12 @@ export function hitHeart() {
       resultEle.innerHTML = `omg，当前你的得分为: ${totalScore}。<br/><br/>不足以挑战下一关<br/><br/>你得重新挑战一下哦~`
       setBtn('again', hitHeart)
     } else {
-      resultEle.innerHTML = `恭喜你，闯关成功！<br/><br/>当前你的得分为：520，<br/><br/>点击按钮继续闯关吧~`
+      resultEle.innerHTML = `
+      当前你的得分为：520，<br/>
+      恭喜你，闯关成功！<br/>
+      这一关我想表达的是，如果你没有努力去争取到520个积分，你就无法进入下一关，就像是我们之间的关系一样，如果你不曾努力向我靠近，我们也就没有后来的故事。<br/>
+      好了，第二关游戏是猜拳，游戏总共有三局，选好出拳结果后点击对应按钮，然后点击pk就行。<br/>
+      快去闯关吧~祝你好运哦~`
       setBtn('next', guessFinger)
     }
   }, 1000 * 30);

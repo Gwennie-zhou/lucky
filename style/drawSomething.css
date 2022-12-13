@@ -9,8 +9,7 @@
 }
 .input-wrap {
   display: flex;
-  margin-top: 15px;
-
+  margin-top: 10px;
 }
 .answer-input {
   outline-style: none ;
@@ -57,4 +56,8 @@
   to {
     border-color: transparent;
   }
+}
+.scene {
+  font-size: 20px;
+  font-weight: 100;
 }

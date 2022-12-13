@@ -1,7 +1,7 @@
 /* 
 我画你猜小游戏
 */
-import { btnEle, loveContainer, reset, setBtn } from './common.js'
+import { loveContainer, reset, resultEle, setBtn } from './common.js'
 import { scratcher } from './scratcher.js'
 
 export function drawSth() {
@@ -22,7 +22,7 @@ export function drawSth() {
       <div class="my-answer"></div>
     </div>
     <div>
-      <div>猜一场景，把你的答案写在下面这个输入框中</div>
+      <div class="scene">猜一场景:</div>
       <div class="input-wrap">
         <input type="text" class="answer-input" placeholder="你的答案~">
         <button class="draw-btn submit">提交</button>
@@ -71,7 +71,17 @@ export function drawSth() {
 
     if (currentIndex >= myAnswer.length - 1) {
       nextBtn.parentNode.removeChild(nextBtn)
-      setBtn('next', scratcher)
+      setBtn('prize', award)
     }
+  }
+
+  function award() {
+    reset()
+    loveContainer.innerHTML = ''
+    resultEle.innerHTML = `
+      你知道的，我不会画画，所以可能画得不太好😅，上面画的这些场景，都是我对你心动的瞬间。<br/>
+      2023年大年初一，我要送给你个礼物，刮开下面这个图层，你就会看到哦。
+    `
+    scratcher()
   }
 }

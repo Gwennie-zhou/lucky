@@ -2,7 +2,7 @@
 1代表石头，2代表剪刀，3代表布
 游戏总共3局，无论对方出什么，这边设定出拳为：布，剪刀，石头，出拳顺序连起来即为520 */
 
-import { btnEle, loveContainer, reset, setBtn } from './common.js'
+import { loveContainer, reset, setBtn, resultEle } from './common.js'
 import { drawSth } from './drawSomething.js';
 
 export function guessFinger() {
@@ -102,6 +102,19 @@ export function guessFinger() {
     pkBtnEle.classList.toggle('forbidden')
     currentRound !== 0 && againEle.classList.toggle('forbidden')
     fingerBtnWrapEle.classList.toggle('forbidden') //因为石头剪刀布按钮的事件是加在外层，所以禁止的应该是这个
+    if (currentRound >=2) {
+      againEle.parentElement.removeChild(againEle)
+      setTimeout(()=>{
+        loveContainer.innerHTML = ''
+        setBtn('next', drawSth)
+        resultEle.innerHTML = `
+          哈哈，傻瓜，看出来了吗？我刚才的出拳顺序，布->剪刀->石头，连起来是什么数字呢？<br/>
+          你在认真玩游戏，我在认真跟你表白呀哈哈~<br/>
+          好了，接下来这关游戏是：我画你猜，游戏总共有3局，每一局都是我出个图，你想好后在输入框中输入你的答案，点击提交后我会给出我的答案。<br/><br/>
+          点击按钮继续去闯关吧~
+        `
+      }, 3000)
+    }
   }
 
   function calcResult() {
@@ -151,10 +164,5 @@ export function guessFinger() {
     againEle.classList.toggle('forbidden')
     pkBtnEle.classList.toggle('forbidden')
     fingerBtnWrapEle.classList.toggle('forbidden')
-
-    if (currentRound >= 2) {
-      againEle.parentElement.removeChild(againEle)
-      setBtn('next', drawSth)
-    }
   }
 }

@@ -9,9 +9,14 @@ export function scratcher() {
     <div class="scratcher-wrap">
       <div class="underlying">
         <img src="./images/love-fill.png" class="underlying-img"/>
-        <div class="underlying-text">我喜欢你</div>
+        <div class="underlying-text">
+          <span>我喜欢你</span>
+          <br/>
+          <span>用我所长，尽我所能，给你一个最浪漫的告白仪式，是我奔向你的证明。</span>
+          <span>你愿意与我一同开启我们的初恋吗</span>
+        </div>
       </div>
-      <canvas id="canvas" width="400" height="100"></canvas>
+      <canvas id="canvas"></canvas>
     </div>
   `
 
@@ -20,7 +25,7 @@ export function scratcher() {
   const ctx = canvas.getContext('2d')
 
   ctx.fillStyle = 'darkgray'
-  ctx.fillRect(0,0,400,100)
+  ctx.fillRect(0,0,400,350)
 
   document.addEventListener("selectstart", function (e) {
     e.preventDefault();
@@ -37,8 +42,9 @@ export function scratcher() {
 
   function move(e) {
     if (isDraw) {
-      const x = e.pageX - scratcherWrap.offsetLeft + scratcherWrap.offsetWidth / 2
-      const y = e.pageY - scratcherWrap.offsetTop - scratcherWrap.offsetHeight / 2
+      console.log(e);
+      const x = e.pageX
+      const y = e.pageY - scratcherWrap.offsetTop
       ctx.beginPath() 
       ctx.arc(x,y, 20, 0, 2 * Math.PI) // 这里的x和y是相对于canvas画布
       ctx.globalCompositeOperation = "destination-out"
