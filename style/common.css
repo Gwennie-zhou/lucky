@@ -22,11 +22,11 @@ html, body {
   position: absolute;
   top: 0;
   left: 0;
-  color: white;
+  color: #523f9d;;
   font-size: 25px;
   line-height: 35px;
   font-family: cursive;
-  margin: 50px 20px;
+  margin: 50px 20px 0;
 }
 .btn {
   position: absolute;
