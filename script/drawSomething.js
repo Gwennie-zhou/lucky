@@ -23,12 +23,12 @@ export function drawSth() {
     </div>
     <div>
       <div>猜一场景，把你的答案写在下面这个输入框中</div>
-      <input type="text" class="answer-input" placeholder="你的答案~">
+      <div class="input-wrap">
+        <input type="text" class="answer-input" placeholder="你的答案~">
+        <button class="draw-btn submit">提交</button>
+      </div>
     </div>
-    <div>
-      <button class="draw-btn submit">提交</button>
-      <button class="draw-btn next">下一局</button>
-    </div>
+    <button class="draw-btn next">下一局</button>
   `
   loveContainer.classList.add('draw')
   
