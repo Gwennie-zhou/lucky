@@ -12,18 +12,21 @@ html, body {
 .love-container {
   height: 100%;
   width: 100%;
-  color: white;
-  font-size: 18px;
+  color: #523f9d;
   font-weight: 700;
+  font-size: 22px;
+  font-family: cursive;
 }
 
 .result {
   position: absolute;
-  top: 10%;
-  left: 10%;
+  top: 0;
+  left: 0;
   color: white;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 25px;
+  line-height: 35px;
+  font-family: cursive;
+  margin: 50px 20px;
 }
 .btn {
   position: absolute;
