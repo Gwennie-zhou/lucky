@@ -4,7 +4,7 @@
 // 3、给爱心绑定点击事件（可以绑定在爱心容器里），点击后积分+10，同时需要给用户一个反馈
 // 4、爱心下落到不可见区域时，需要销毁，可以设置一个定时器，每隔2秒监听所生成的爱心图像
 
-import { createRandom, reset, loveContainer, screenHeight, screenWidth, btnEle, resultEle } from './common.js'
+import { createRandom, reset, loveContainer, screenHeight, screenWidth, btnEle, resultEle, setBtn } from './common.js'
 import { guessFinger } from './fingerGuess.js'
 
 
@@ -13,7 +13,7 @@ let loveList; // 用于收集生成的红包
 let clickedLoveList; //用于收集已集中的红包
 
 // 开始游戏
-export function startGame() {
+export function hitHeart() {
   reset()
   // 每次游戏开始后都重置变量
   totalScore = 0;
@@ -36,17 +36,14 @@ export function startGame() {
   // 计时1min，1min后出结果
   setTimeout(() => {
     clearInterval(timeID);
-    btnEle.classList.add('show')
     if (totalScore < 520) {
       resultEle.innerHTML = `omg，当前你的得分为: ${totalScore}。<br/><br/>不足以挑战下一关<br/><br/>你得重新挑战一下哦~`
-      btnEle.textContent = 'again'
-      btnEle.addEventListener('click', startGame)
+      setBtn('again', hitHeart)
     } else {
       resultEle.innerHTML = `恭喜你，闯关成功！<br/><br/>当前你的得分为：520，<br/><br/>点击按钮继续闯关吧~`
-      btnEle.textContent = 'next'
-      btnEle.addEventListener('click', guessFinger)
+      setBtn('next', guessFinger)
     }
-  }, 1000 * 60);
+  }, 1000 * 30);
 }
 
 

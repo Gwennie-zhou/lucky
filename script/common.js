@@ -14,5 +14,19 @@ export function createRandom(min, max) {
 export function reset() {
   resultEle.innerHTML.length && (resultEle.innerHTML = '')
   btnEle.className.includes('show') && (btnEle.classList.remove('show'))
+}
 
+/* 
+函数：闯关按钮设置
+参数 text: button按钮文字显示
+参数fn：监听的事件函数
+
+*/
+export function setBtn(text, fn) {
+  btnEle.classList.add('show')
+  btnEle.textContent = text
+  // addEventListener允许为一个事件添加多个监听器，因此需要添加once选项，表示 listener 在添加之后最多只调用一次。
+  btnEle.addEventListener('click', fn, {
+    once : true
+  })
 }

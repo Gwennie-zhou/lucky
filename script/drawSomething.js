@@ -1,7 +1,7 @@
 /* 
 我画你猜小游戏
 */
-import { btnEle, loveContainer, reset } from './common.js'
+import { btnEle, loveContainer, reset, setBtn } from './common.js'
 import { scratcher } from './scratcher.js'
 
 export function drawSth() {
@@ -71,9 +71,7 @@ export function drawSth() {
 
     if (currentIndex >= myAnswer.length - 1) {
       nextBtn.parentNode.removeChild(nextBtn)
-      btnEle.textContent = '下一关'
-      btnEle.classList.add('show')
-      btnEle.addEventListener('click', scratcher)
+      setBtn('next', scratcher)
     }
   }
 }
