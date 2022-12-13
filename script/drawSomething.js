@@ -60,6 +60,18 @@ export function drawSth() {
       if (i <= length) {
         setTimeout(typing, 500)
       }
+      // 最后一局且打字结束
+      if (currentIndex === imgList.length - 1 &&  i >= length) {
+        setTimeout(()=>{
+          loveContainer.innerHTML = ''
+          resultEle.innerHTML = `
+            你知道的，我不会画画，所以可能画得不太好😅，上面画的这些场景，都是我对你心动的瞬间。<br/>
+            游戏到此就结束了~恭喜你，闯关成功！<br/>
+            点击按钮去领取你的礼物吧~
+          `
+          setBtn('prize', receivePrize)
+        }, 2000)
+      }
     }
   }
 
@@ -71,15 +83,13 @@ export function drawSth() {
 
     if (currentIndex >= myAnswer.length - 1) {
       nextBtn.parentNode.removeChild(nextBtn)
-      setBtn('prize', award)
     }
   }
 
-  function award() {
+  function receivePrize() {
     reset()
     loveContainer.innerHTML = ''
     resultEle.innerHTML = `
-      你知道的，我不会画画，所以可能画得不太好😅，上面画的这些场景，都是我对你心动的瞬间。<br/>
       2023年大年初一，我要送给你个礼物，刮开下面这个图层，你就会看到哦。
     `
     scratcher()
