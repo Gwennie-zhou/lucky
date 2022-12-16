@@ -10,7 +10,7 @@ resultEle.innerHTML = `
   点击最右下方的按钮开始挑战吧~
 `
 
-// setBtn('start', startGame)
+setBtn('start', startGame)
 
 function startGame() {
   document.querySelector('audio').play()
@@ -20,5 +20,5 @@ function startGame() {
 
 // TODO: 待删
 // guessFinger()
-drawSth()
+// drawSth()
 // scratcher()
